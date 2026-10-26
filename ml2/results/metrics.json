@@ -1,0 +1,149 @@
+{
+  "rule_based": {
+    "model_name": "Rule-Based Baseline",
+    "total_samples": 14,
+    "phishing_samples": 7,
+    "legitimate_samples": 7,
+    "true_positives": 5,
+    "false_positives": 0,
+    "true_negatives": 7,
+    "false_negatives": 2,
+    "precision": 1.0,
+    "recall": 0.7143,
+    "f1_score": 0.8333,
+    "false_positive_rate": 0.0,
+    "confusion_matrix": {
+      "tn": 7,
+      "fp": 0,
+      "fn": 2,
+      "tp": 5
+    }
+  },
+  "logistic_regression": {
+    "model_name": "TF-IDF + Logistic Regression",
+    "total_samples": 14,
+    "phishing_samples": 7,
+    "legitimate_samples": 7,
+    "true_positives": 7,
+    "false_positives": 2,
+    "true_negatives": 5,
+    "false_negatives": 0,
+    "precision": 0.7778,
+    "recall": 1.0,
+    "f1_score": 0.875,
+    "false_positive_rate": 0.2857,
+    "confusion_matrix": {
+      "tn": 5,
+      "fp": 2,
+      "fn": 0,
+      "tp": 7
+    }
+  },
+  "linear_svm": {
+    "model_name": "TF-IDF + Linear SVM (Calibrated)",
+    "total_samples": 14,
+    "phishing_samples": 7,
+    "legitimate_samples": 7,
+    "true_positives": 7,
+    "false_positives": 4,
+    "true_negatives": 3,
+    "false_negatives": 0,
+    "precision": 0.6364,
+    "recall": 1.0,
+    "f1_score": 0.7778,
+    "false_positive_rate": 0.5714,
+    "confusion_matrix": {
+      "tn": 3,
+      "fp": 4,
+      "fn": 0,
+      "tp": 7
+    }
+  },
+  "urgent_legit_performance": {
+    "total_urgent_legitimate_samples": 5,
+    "rule_false_positives": 0,
+    "rule_urgent_fpr": 0.0,
+    "lr_false_positives": 2,
+    "lr_urgent_fpr": 0.4,
+    "svm_false_positives": 4,
+    "svm_urgent_fpr": 0.8
+  },
+  "error_analysis": [
+    {
+      "message_id": "MSG_0091",
+      "channel": "email",
+      "campaign_group": "phish_unfamiliar_wording_cloud_v4",
+      "actual_label": "phishing",
+      "rule_prediction": "legitimate",
+      "lr_prediction": "phishing",
+      "svm_prediction": "phishing",
+      "error_type": "False Negative (Phishing evaded detection)",
+      "subject_or_title": "Asset Collaboration Request",
+      "body_snippet": "Colleague collaboration invitation: A shared cloud document repository requires organizational clearance prior to synchronization. Please re...",
+      "root_cause_analysis": "Unfamiliar wording or lack of explicit coercive threats bypassed keyword and n-gram triggers.",
+      "recommended_mitigation": "Expand training coverage of subtler spear-phishing lures and cross-campaign holdout tuning."
+    },
+    {
+      "message_id": "MSG_0093",
+      "channel": "email",
+      "campaign_group": "phish_unfamiliar_wording_cloud_v4",
+      "actual_label": "phishing",
+      "rule_prediction": "legitimate",
+      "lr_prediction": "phishing",
+      "svm_prediction": "phishing",
+      "error_type": "False Negative (Phishing evaded detection)",
+      "subject_or_title": "Contract Milestone Verification",
+      "body_snippet": "Vendor contract amendment: We noticed anomalous parameters regarding milestone 20500. Kindly verify the digital signature ledger at hxxps://...",
+      "root_cause_analysis": "Unfamiliar wording or lack of explicit coercive threats bypassed keyword and n-gram triggers.",
+      "recommended_mitigation": "Expand training coverage of subtler spear-phishing lures and cross-campaign holdout tuning."
+    },
+    {
+      "message_id": "MSG_0281",
+      "channel": "email",
+      "campaign_group": "legit_urgent_incident",
+      "actual_label": "legitimate",
+      "rule_prediction": "legitimate",
+      "lr_prediction": "legitimate",
+      "svm_prediction": "phishing",
+      "error_type": "False Positive (Legitimate flagged as Phishing)",
+      "subject_or_title": "URGENT: Incident INC-7046 - Production Latency",
+      "body_snippet": "URGENT P1 INCIDENT #INC-8753: Payment API latency spike observed across EU clusters. SRE incident response bridge active on Slack #incident-...",
+      "root_cause_analysis": "Legitimate operational urgency cues mimicked phishing pressure markers.",
+      "recommended_mitigation": "Strengthen legitimate operational contextual whitelist rules and domain header verification."
+    },
+    {
+      "message_id": "MSG_0282",
+      "channel": "email",
+      "campaign_group": "legit_urgent_incident",
+      "actual_label": "legitimate",
+      "rule_prediction": "legitimate",
+      "lr_prediction": "legitimate",
+      "svm_prediction": "phishing",
+      "error_type": "False Positive (Legitimate flagged as Phishing)",
+      "subject_or_title": "Urgent: Scheduled Maintenance Tonight",
+      "body_snippet": "Urgent notice: Scheduled database failover maintenance will take place tonight at 02:00 UTC. Secondary replicas will promote automatically. ...",
+      "root_cause_analysis": "Legitimate operational urgency cues mimicked phishing pressure markers.",
+      "recommended_mitigation": "Strengthen legitimate operational contextual whitelist rules and domain header verification."
+    },
+    {
+      "message_id": "MSG_0283",
+      "channel": "email",
+      "campaign_group": "legit_urgent_incident",
+      "actual_label": "legitimate",
+      "rule_prediction": "legitimate",
+      "lr_prediction": "phishing",
+      "svm_prediction": "phishing",
+      "error_type": "False Positive (Legitimate flagged as Phishing)",
+      "subject_or_title": "P1 Alert: CI/CD Build Pipeline Stalled",
+      "body_snippet": "Priority 1 Alert: Build pipeline blocked due to failing integration test in repository core-service. All engineers please hold master merges...",
+      "root_cause_analysis": "Legitimate operational urgency cues mimicked phishing pressure markers.",
+      "recommended_mitigation": "Strengthen legitimate operational contextual whitelist rules and domain header verification."
+    }
+  ],
+  "campaigns_evaluated": [
+    "legit_pwd_reset_routine",
+    "legit_urgent_incident",
+    "phish_sms_bank_fraud_v6",
+    "phish_unfamiliar_wording_cloud_v4"
+  ]
+}

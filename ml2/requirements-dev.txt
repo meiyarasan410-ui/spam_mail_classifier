@@ -1,0 +1,5 @@
+# Local Development Dependencies (Streamlit Dashboard, Matplotlib Visualizations, Pytest)
+-r requirements.txt
+streamlit>=1.35.0
+matplotlib>=3.8.0
+pytest>=8.0.0

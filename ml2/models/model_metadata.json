@@ -1,0 +1,59 @@
+{
+  "training_timestamp": "2026-10-22T18:09:59.263575",
+  "total_train_samples": 75,
+  "train_campaigns": [
+    "legit_it_announcements",
+    "legit_payroll_regular",
+    "legit_sms_2fa_codes",
+    "legit_team_collaboration",
+    "phish_exec_impersonation_v7",
+    "phish_password_reset_spoof_v3",
+    "phish_payroll_directdeposit_v2",
+    "phish_sms_package_delivery_v5",
+    "phish_urgent_suspension_v1"
+  ],
+  "vocabulary_size": 457,
+  "models": {
+    "logistic_regression": {
+      "file": "logistic_regression.joblib",
+      "type": "TfidfVectorizer + LogisticRegression",
+      "hyperparameters": {
+        "C": 1.0,
+        "solver": "lbfgs",
+        "class_weight": "balanced"
+      },
+      "limitations": "Linear probability estimation based on token frequency; susceptible to out-of-vocabulary evasion and synonym substitution."
+    },
+    "linear_svm": {
+      "file": "linear_svm.joblib",
+      "type": "TfidfVectorizer + CalibratedClassifierCV(LinearSVC)",
+      "hyperparameters": {
+        "C": 1.0,
+        "calibration": "sigmoid (Platt scaling)",
+        "cv": 3
+      },
+      "limitations": "Maximum-margin hyperplane with Platt sigmoid calibration; robust against sparse noise, but does not capture non-linear sentence semantics."
+    }
+  },
+  "experiment_settings": {
+    "deduplication_report": {
+      "raw_count": 420,
+      "exact_duplicates_count": 180,
+      "near_duplicate_instances_removed": 331,
+      "retained_count": 89,
+      "template_clusters_count": 89,
+      "similarity_threshold_used": 0.85,
+      "removal_ratio": 0.7881
+    },
+    "split_metadata": {
+      "train_samples": 75,
+      "test_samples": 14,
+      "test_campaigns": [
+        "legit_pwd_reset_routine",
+        "legit_urgent_incident",
+        "phish_sms_bank_fraud_v6",
+        "phish_unfamiliar_wording_cloud_v4"
+      ]
+    }
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "sanitization_protocol_version": "1.0-DEFANG",
+  "generated_at": "2026-10-22T18:14:00Z",
+  "sanitization_rules_applied": [
+    {
+      "rule_id": "DEFANG_SCHEME_HTTP",
+      "target_pattern": "http://",
+      "replacement": "hxxp://",
+      "purpose": "Prevents active hyperlink formation in email clients and web renderers"
+    },
+    {
+      "rule_id": "DEFANG_SCHEME_HTTPS",
+      "target_pattern": "https://",
+      "replacement": "hxxps://",
+      "purpose": "Prevents active TLS socket resolution and automatic browser pre-fetching"
+    },
+    {
+      "rule_id": "DEFANG_DOMAIN_DOT",
+      "target_pattern": ".",
+      "replacement": "[.]",
+      "purpose": "Neutralizes DNS lookup requests while preserving human-readable domain structure"
+    },
+    {
+      "rule_id": "IP_HOST_DEFANG",
+      "target_pattern": "198.51.100.42",
+      "replacement": "198[.]51[.]100[.]42",
+      "purpose": "Neutralizes direct IP address connection attempts"
+    },
+    {
+      "rule_id": "SHORTENER_DEFANG",
+      "target_pattern": "bit.ly / tinyurl.com",
+      "replacement": "bit[.]ly / tinyurl[.]com",
+      "purpose": "Prevents redirection resolution to malicious landing pages"
+    }
+  ],
+  "messages_sanitized_count": 420,
+  "live_network_calls_blocked": true,
+  "pii_redacted": true
+}
